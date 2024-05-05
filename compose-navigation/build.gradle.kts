@@ -70,3 +70,11 @@ fun RepositoryHandler.gitlabMavenRepository() {
         }
     }
 }
+
+fun MavenPomDeveloperSpec.acrusage() {
+    developer {
+        id = "acrusage"
+        name = "Stefan Kreiner"
+        email = "borin_bickle@8alias.com"
+    }
+}
