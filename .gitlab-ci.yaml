@@ -7,7 +7,17 @@
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
 stages:
   - test
+  - deploy
+
 sast:
   stage: test
 include:
   - template: Security/SAST.gitlab-ci.yml
+
+deploy:
+  stage: deploy
+  image: gradle:8.7.0-jdk17
+  script:
+    - 'gradle publish'
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

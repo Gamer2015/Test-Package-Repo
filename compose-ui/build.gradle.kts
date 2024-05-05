@@ -10,9 +10,6 @@ plugins {
 val group: String by project
 val version: String by project
 
-// other properties
-val gitlabRepositoryProjectId: String by project
-
 kotlin {
     jvm()
     sourceSets {
@@ -44,29 +41,16 @@ kotlin {
     }
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("library") {
-            pom {
-                name = "Compose UI"
-                description = "Kotlin Multiplatform Compose Composables"
-                url = "https://gitlab.com/purplefriends/libraries/kotlin/compose-common/-/tree/main/compose-ui"
-                developers {
-                    acrusage()
-                }
-            }
-        }
-    }
-    repositories {
-        gitlabMavenRepository()
-    }
-}
-
 tasks.named<Test>("jvmTest") {
     useJUnitPlatform()
 }
 
 
+publishing {
+    repositories {
+        gitlabMavenRepository()
+    }
+}
 
 /**
  * common build utils
@@ -76,20 +60,11 @@ fun RepositoryHandler.gitlabMavenRepository() {
         val gitlabRepositoryProjectId: String by project
         url = uri("https://gitlab.com/api/v4/projects/$gitlabRepositoryProjectId/packages/maven")
         credentials(HttpHeaderCredentials::class) {
-            name = "Deploy-Token"
-            value =
-                findProperty("gitLabPrivateToken") as String? // the variable resides in $GRADLE_USER_HOME/gradle.properties
+            name = "Job-Token"
+            value = System.getenv("CI_JOB_TOKEN")
         }
         authentication {
             create("header", HttpHeaderAuthentication::class)
         }
-    }
-}
-
-fun MavenPomDeveloperSpec.acrusage() {
-    developer {
-        id = "acrusage"
-        name = "Stefan Kreiner"
-        email = "borin_bickle@8alias.com"
     }
 }
