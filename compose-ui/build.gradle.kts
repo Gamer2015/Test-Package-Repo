@@ -48,16 +48,11 @@ publishing {
     publications {
         create<MavenPublication>("library") {
             pom {
-                name = "Compose Navigation"
-                description = "Kotlin Multiplatform Compose primitives for typed navigation"
-                url = "https://gitlab.com/purplefriends/lib/kotlinmp/compose-navigation"
-                properties = mapOf()
+                name = "Compose UI"
+                description = "Kotlin Multiplatform Compose Composables"
+                url = "https://gitlab.com/purplefriends/libraries/kotlin/compose-common/-/tree/main/compose-ui"
                 developers {
-                    developer {
-                        id = "acrusage"
-                        name = "Stefan Kreiner"
-                        email = "borin_bickle@8alias.com"
-                    }
+                    acrusage()
                 }
             }
         }
@@ -88,5 +83,13 @@ fun RepositoryHandler.gitlabMavenRepository() {
         authentication {
             create("header", HttpHeaderAuthentication::class)
         }
+    }
+}
+
+fun MavenPomDeveloperSpec.acrusage() {
+    developer {
+        id = "acrusage"
+        name = "Stefan Kreiner"
+        email = "borin_bickle@8alias.com"
     }
 }
