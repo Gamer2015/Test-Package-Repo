@@ -40,27 +40,16 @@ kotlin {
     }
 }
 
+tasks.named<Test>("jvmTest") {
+    useJUnitPlatform()
+}
+
+
+
 publishing {
-    publications {
-        create<MavenPublication>("library") {
-            pom {
-                name = "Compose Navigation"
-                description = "Kotlin Multiplatform Compose primitives for typed navigation"
-                url =
-                    "https://gitlab.com/purplefriends/libraries/kotlin/compose-common/-/tree/main/compose-navigation"
-                developers {
-                    acrusage()
-                }
-            }
-        }
-    }
     repositories {
         gitlabMavenRepository()
     }
-}
-
-tasks.named<Test>("jvmTest") {
-    useJUnitPlatform()
 }
 
 
@@ -73,9 +62,8 @@ fun RepositoryHandler.gitlabMavenRepository() {
         val gitlabRepositoryProjectId: String by project
         url = uri("https://gitlab.com/api/v4/projects/$gitlabRepositoryProjectId/packages/maven")
         credentials(HttpHeaderCredentials::class) {
-            name = "Deploy-Token"
-            value =
-                findProperty("gitLabPrivateToken") as String? // the variable resides in $GRADLE_USER_HOME/gradle.properties
+            name = "Job-Token"
+            value = System.getenv("CI_JOB_TOKEN")
         }
         authentication {
             create("header", HttpHeaderAuthentication::class)
