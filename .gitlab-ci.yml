@@ -16,7 +16,7 @@ include:
 
 deploy:
   stage: deploy
-  image: gradle:8.7.0-jdk17
+  image: gbc-macos-large
   script:
     - 'gradle publish'
   rules:
