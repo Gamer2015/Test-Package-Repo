@@ -9,9 +9,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
-import eu.purplefriends.libraries.kotlin.compose.ui.navigation.NavigationDestination
-import eu.purplefriends.libraries.kotlin.compose.ui.navigation.NavigationGraph
-import eu.purplefriends.libraries.kotlin.compose.ui.navigation.NavigationGraphNode
 
 @Composable
 fun BottomNavigationBar(
@@ -81,13 +78,3 @@ data class NavigationItemData(
     val icon: ImageVector,
     val startDestination: String,
 )
-
-fun NavigationGraphNode.startDestination(visitedNodes: Set<NavigationGraphNode> = setOf()): String {
-    if(this in visitedNodes) {
-        throw Exception("Recursive accessor")
-    }
-    return when(this) {
-        is NavigationGraph -> children.first().startDestination(visitedNodes + this)
-        is NavigationDestination -> route
-    }
-}
