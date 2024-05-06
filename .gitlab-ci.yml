@@ -16,7 +16,7 @@ include:
 
 deploy:
   stage: deploy
-  image: gbc-macos-large
+  image: macos-14-xcode-15
   script:
     - 'gradle publish'
   rules:
