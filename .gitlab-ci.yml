@@ -9,12 +9,21 @@ stages:
   - test
   - deploy
 
+.macos_saas_runners:
+  tags:
+    - saas-macos-medium-m1
+  image: macos-14-xcode-15
+  before_script:
+    - echo "started by ${GITLAB_USER_NAME}"
+
 sast:
   stage: test
 include:
   - template: Security/SAST.gitlab-ci.yml
 
 deploy:
+  extends:
+    - .macos_saas_runners
   stage: deploy
   image: macos-14-xcode-15
   script:
