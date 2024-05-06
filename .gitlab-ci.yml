@@ -19,5 +19,5 @@ deploy:
   image: macos-14-xcode-15
   script:
     - 'gradle publish'
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+#  rules:
+#    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
