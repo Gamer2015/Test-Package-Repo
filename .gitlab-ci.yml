@@ -16,7 +16,7 @@ include:
 
 deploy:
   stage: deploy
-  image: gradle:8.7.0-jdk17
+  image: mobiledevops/android-sdk-image:34.0.0
   script:
     - 'gradle publish'
 #  rules:
