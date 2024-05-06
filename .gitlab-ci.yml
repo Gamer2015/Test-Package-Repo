@@ -16,8 +16,11 @@ include:
 
 deploy:
   stage: deploy
-  image: mobiledevops/android-sdk-image:34.0.0
+  image: gradle:8.7.0-jdk17
   script:
+    - 'echo "echo pwd"'
+    - 'pwd'
+    - 'echo "sdk.dir=~/Android/Sdk" > local.properties'
     - 'gradle publish'
 #  rules:
 #    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
