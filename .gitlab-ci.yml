@@ -19,8 +19,9 @@ deploy:
   image: gradle:8.7.0-jdk17
   script:
     - 'echo "echo pwd"'
-    - 'pwd'
+    - 'ls -al'
     - 'echo "sdk.dir=~/Android/Sdk" > local.properties'
+    - 'cat local.properties'
     - 'gradle publish'
 #  rules:
 #    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
