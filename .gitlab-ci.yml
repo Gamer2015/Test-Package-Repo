@@ -16,10 +16,8 @@ include:
 
 deploy:
   stage: deploy
-  image: fabernovel/android:api-34-v1.8.0
+  image: mobiledevops/android-sdk-image:latest
   script:
-    - 'ls'
-    - 'chmod +x ./gradlew'
     - './gradlew publish'
 #  rules:
 #    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
