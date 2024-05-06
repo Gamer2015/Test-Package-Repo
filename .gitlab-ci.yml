@@ -16,12 +16,8 @@ include:
 
 deploy:
   stage: deploy
-  image: gradle:8.7.0-jdk17
+  image: fabernovel/android:api-34-v1.8.0
   script:
-    - 'echo "echo pwd"'
-    - 'ls -al'
-    - 'echo "sdk.dir=~/Android/Sdk" > local.properties'
-    - 'cat local.properties'
     - 'gradle publish'
 #  rules:
 #    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
