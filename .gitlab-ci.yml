@@ -5,25 +5,13 @@
 # Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
-image: mobiledevops/android-sdk-image:latest
 
 stages:
-  - build
-  - test
   - deploy
-
-build:
-  stage: build
-  script:
-    - './gradlew clean assemble'
-
-test:
-  stage: test
-  script:
-    - './gradlew check'
 
 deploy:
   stage: deploy
+  image: mobiledevops/android-sdk-image:latest
   script:
     - './gradlew publish'
 #  rules:
