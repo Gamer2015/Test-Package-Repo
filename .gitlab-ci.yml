@@ -14,22 +14,16 @@ stages:
 
 build:
   stage: build
-  artifacts:
-    untracked: true
   script:
     - './gradlew clean assemble'
 
 test:
   stage: test
-  dependencies:
-    - build
   script:
     - './gradlew check'
 
 deploy:
   stage: deploy
-  dependencies:
-    - build
   script:
     - './gradlew publish'
 #  rules:
