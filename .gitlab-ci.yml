@@ -18,6 +18,6 @@ deploy:
   stage: deploy
   image: mobiledevops/android-sdk-image:latest
   script:
-    - 'gradle publish'
-#  rules:
-#    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - './gradlew publish'
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
