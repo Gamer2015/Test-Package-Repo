@@ -1,4 +1,5 @@
 plugins {
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotest.multiplatform)
     alias(libs.plugins.jetbrains.compose)
@@ -12,6 +13,10 @@ val version: String by project
 
 kotlin {
     jvm()
+    androidTarget {
+        publishLibraryVariants("release", "debug")
+    }
+
     sourceSets {
         commonMain {
             dependencies {
@@ -38,6 +43,20 @@ kotlin {
                 implementation(libs.kotest.runner.junit5)
             }
         }
+    }
+}
+
+android {
+    namespace = group
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
+
+    defaultConfig {
+        minSdk = libs.versions.android.minSdk.get().toInt()
+        testOptions.targetSdk = libs.versions.android.targetSdk.get().toInt()
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
